@@ -32,7 +32,44 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.title {
+  @apply text-2xl text-indigo-800 font-bold pb-4
+}
+
+.subtitle {
+  @apply text-lg text-black font-bold pb-4
+}
+
+.input {
+  @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-purple-500
+}
+
+.radio {
+  @apply mr-1
+}
+
+.btn {
+  @apply bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-1 px-2 rounded
+}
+
+.btn:disabled {
+  @apply bg-gray-400 text-white font-bold py-1 px-2 rounded
+}
+
+.btn-sm {
+  @apply bg-indigo-500 hover:bg-indigo-700 text-sm text-white py-0 px-1 rounded
+}
+
+.btn-link {
+  @apply px-3 text-indigo-800 hover:text-indigo-500
+}
+
+.link {
+  @apply text-indigo-800 hover:text-indigo-500
 }

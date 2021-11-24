@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { handleInitialData } from './actions/shared'
+import QuestionList from './components/QuestionList'
+import Question from './components/Question'
+import SignIn from './components/SignIn'
+import NewQuestion from './components/NewQuestion'
+import LeaderBoard from './components/LeaderBoard'
+import NavBar from './components/NavBar'
+import Error404 from './components/Error404'
+
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          {this.props.loading === true
+            ? null
+            // : <SignIn />
+            // : <Question id={"loxhs1bqm25b708cmbf3g"} />
+            // : <NewQuestion  />
+            : <div>
+                <NavBar />
+                <Route path="/" exact component={QuestionList} />
+                <Route path="/add" component={NewQuestion} />
+                <Route path="/question/:id" component={Question} />
+                <Route path="/leaderboard" component={LeaderBoard} />
+                <Route path="/signin" component={SignIn} />
+                <Route path="/404" component={Error404} />
+              </div>
+          }
+        </div>
+      </Router>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+
+export default connect(mapStateToProps)(App);
